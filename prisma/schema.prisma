@@ -11,13 +11,69 @@ generator client {
 }
 
 // User
-model User {}
+model User {
+  id           Int    @id @default(autoincrement())
+  firstname    String
+  lastname     String
+  email        String @unique
+  username     String @unique
+  password     String
+  profileimage String
+  role         Role   @default(USER)
+
+  // User's posts
+  posts Post[]
+
+  // User's likes
+  likes Like[]
+
+  // User's comments
+  comments Comment[]
+}
 
 // Post
-model Post {}
+model Post {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  title     String
+  content   String?
+  author    User      @relation(fields: [authorId], references: [id])
+  authorId  Int
+  comments  Comment[]
+  likes     Like[]
+  published Boolean
+}
 
 // Comment
-model Comment {}
+model Comment {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  content   String
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
+  // comments  Comment[] // needs to be child comment for comments on comments
+  likes     Like[]
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    Int
+}
 
 // Like
-model Like {}
+model Like {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
+  comment   Comment  @relation(fields: [commentId], references: [id])
+  commentId Int
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    Int
+}
+
+// Role
+enum Role {
+  USER
+  ADMIN
+}
