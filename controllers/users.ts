@@ -48,3 +48,5 @@ router.delete('/:id', async (req, res) => {
 
 	res.json(deletedUser);
 });
+
+export default router;
