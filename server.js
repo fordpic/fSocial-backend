@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import userRoutes from './controllers/users';
+import router from './controllers/users.js';
 
 dotenv.config();
 
@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Controllers
-app.use('/users', userRoutes);
+app.use('/users', router);
 
 app.listen(process.env.PORT || port, () => {
 	console.log(`listening on ${port}`);

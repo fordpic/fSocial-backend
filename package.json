@@ -1,7 +1,8 @@
 {
   "name": "freddit-backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "exports": "./index.js",
+  "type": "module",
   "license": "MIT",
   "dependencies": {
     "@prisma/client": "4.12.0",
