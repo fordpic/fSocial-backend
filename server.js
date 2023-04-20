@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import userRoutes from './controllers/users.js';
 import postRoutes from './controllers/posts.js';
+import commentRoutes from './controllers/comments.js';
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 // Controllers
 app.use('/users', userRoutes);
 app.use('/posts', postRoutes);
+app.use('/comments', commentRoutes);
 
 app.listen(process.env.PORT || port, () => {
 	console.log(`listening on ${port}`);
