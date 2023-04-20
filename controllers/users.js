@@ -37,7 +37,7 @@ router.put('/update/:id', async (req, res) => {
 		data: req.body,
 	});
 
-	res.json(updatedUser);
+	res.json({ message: 'User profile updated', user: updatedUser });
 });
 
 // DELETE USER
