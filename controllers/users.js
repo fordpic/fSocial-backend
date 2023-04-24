@@ -21,7 +21,7 @@ router.get('/:id', async (req, res) => {
 	res.json({ user });
 });
 
-// CREATE USER w/ msg response
+// CREATE USER
 router.post('/create', async (req, res) => {
 	const newUser = await prisma.user.create({
 		data: req.body,
