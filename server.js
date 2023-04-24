@@ -4,6 +4,7 @@ import userRoutes from './controllers/users.js';
 import postRoutes from './controllers/posts.js';
 import commentRoutes from './controllers/comments.js';
 import likeRoutes from './controllers/likes.js';
+import { register, login } from './controllers/auth.js';
 
 dotenv.config();
 
@@ -15,6 +16,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Controllers
+app.use('/register', register);
+app.use('/login', login);
 app.use('/users', userRoutes);
 app.use('/posts', postRoutes);
 app.use('/comments', commentRoutes);
