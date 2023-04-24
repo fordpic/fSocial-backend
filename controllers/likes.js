@@ -11,27 +11,39 @@ router.get('/', async (req, res) => {
 });
 
 // GET LIKE BY ID
-router.get('/:id', async (req, res) => {
+router.get('/:postId', async (req, res) => {
 	const like = await prisma.like.findUnique({
-		where: { id: Number(req.params.id) },
+		where: { id: Number(req.params.postId) },
 	});
 
 	res.json({ like });
 });
 
 // CREATE LIKE
-router.post('/create', async (req, res) => {
+router.post('/create/:postId', async (req, res) => {
 	const newLike = await prisma.like.create({
-		data: req.body,
+		data: {
+			value: 1,
+			posts: {
+				connect: {
+					id: Number(req.params.postId),
+				},
+			},
+			author: {
+				connect: {
+					id: req.currentUser,
+				},
+			},
+		},
 	});
 
 	res.json({ message: 'Successfully liked', like: newLike });
 });
 
 // DELETE LIKE
-router.delete('/:id', async (req, res) => {
+router.delete('/:postId', async (req, res) => {
 	const deletedLike = await prisma.like.delete({
-		where: { id: Number(req.params.id) },
+		where: { id: Number(req.params.postId) },
 	});
 
 	res.json({

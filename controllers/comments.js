@@ -20,9 +20,21 @@ router.get('/:id', async (req, res) => {
 });
 
 // CREATE COMMENT
-router.post('/create', async (req, res) => {
+router.post('/create/:postId', async (req, res) => {
 	const newComment = await prisma.comment.create({
-		data: req.body,
+		data: {
+			content: req.body.content,
+			author: {
+				connect: {
+					id: req.currentUser,
+				},
+			},
+			posts: {
+				connect: {
+					id: Number(req.params.postId),
+				},
+			},
+		},
 	});
 
 	res.json({ message: 'New comment created', comment: newComment });

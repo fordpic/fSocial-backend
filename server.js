@@ -1,5 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
+import authRequired from './middleware/authRequired.js';
 import userRoutes from './controllers/users.js';
 import postRoutes from './controllers/posts.js';
 import commentRoutes from './controllers/comments.js';
@@ -15,13 +17,16 @@ const port = 4000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Cookie Parser
+app.use(cookieParser());
+
 // Controllers
 app.use('/register', register);
 app.use('/login', login);
-app.use('/users', userRoutes);
-app.use('/posts', postRoutes);
-app.use('/comments', commentRoutes);
-app.use('/likes', likeRoutes);
+app.use('/users', authRequired, userRoutes);
+app.use('/posts', authRequired, postRoutes);
+app.use('/comments', authRequired, commentRoutes);
+app.use('/likes', authRequired, likeRoutes);
 
 app.listen(process.env.PORT || port, () => {
 	console.log(`listening on ${port}`);

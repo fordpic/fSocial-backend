@@ -22,7 +22,14 @@ router.get('/:id', async (req, res) => {
 // CREATE POST
 router.post('/create', async (req, res) => {
 	const newPost = await prisma.post.create({
-		data: req.body,
+		data: {
+			...req.body,
+			author: {
+				connect: {
+					id: req.currentUser,
+				},
+			},
+		},
 	});
 
 	res.json({ message: 'New post created', post: newPost });
