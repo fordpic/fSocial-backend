@@ -5,9 +5,9 @@ dotenv.config();
 
 const authRequired = (req, res, next) => {
 	const bearerHeader = req.headers['authorization'];
-	console.log(bearerHeader);
+	// console.log(bearerHeader);
 
-	if (typeof token !== 'undefined') {
+	if (typeof bearerHeader !== 'undefined') {
 		const token = bearerHeader.split(' ')[1];
 		jwt.verify(token, process.env.JWT_SECRET, function (err, payload) {
 			console.log('JWT Payload: ', payload);

@@ -84,20 +84,25 @@ const login = async (req, res) => {
 		// Check for password match
 		const match = await bcrypt.compare(req.body.password, foundUser.password);
 
-		// If they do not a match, revert
+		// If they do not match, revert
 		if (!match) {
 			return res.json({
 				message: 'Incorrect Password',
 			});
 		}
 
+		const isMatch = await bcrypt.compare(req.body.password, foundUser.password);
+
 		// If they match, sign with their JWT & log them in
-		if (match) {
+		if (isMatch) {
 			const signedJwt = jwt.sign(
 				{
 					id: foundUser.id,
 				},
-				process.env.JWT_SECRET
+				process.env.JWT_SECRET,
+				{
+					expiresIn: '1d',
+				}
 			);
 
 			res.cookie('token', signedJwt, {
