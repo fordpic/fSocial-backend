@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import authRequired from './middleware/authRequired.js';
 import userRoutes from './controllers/users.js';
@@ -16,6 +17,11 @@ const port = 4000;
 // Express
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(
+	cors({
+		origin: '*',
+	})
+);
 
 // Cookie Parser
 app.use(cookieParser());

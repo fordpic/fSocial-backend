@@ -5,7 +5,7 @@ dotenv.config();
 
 const authRequired = (req, res, next) => {
 	const bearerHeader = req.headers['authorization'];
-	// console.log(bearerHeader);
+	console.log(bearerHeader);
 
 	if (typeof bearerHeader !== 'undefined') {
 		const token = bearerHeader.split(' ')[1];
@@ -14,7 +14,7 @@ const authRequired = (req, res, next) => {
 
 			if (err) res.sendStatus(500);
 
-			req.currentUser = payload.id;
+			req.currentUser = payload?.id; // payload reading undefined
 			next();
 		});
 	} else {

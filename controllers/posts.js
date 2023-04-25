@@ -26,7 +26,7 @@ router.post('/create', async (req, res) => {
 			...req.body,
 			author: {
 				connect: {
-					id: req.currentUser,
+					id: req?.currentUser,
 				},
 			},
 		},
