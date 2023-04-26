@@ -29,7 +29,7 @@ router.post('/create/:postId', async (req, res) => {
 					id: req.currentUser,
 				},
 			},
-			posts: {
+			post: {
 				connect: {
 					id: Number(req.params.postId),
 				},

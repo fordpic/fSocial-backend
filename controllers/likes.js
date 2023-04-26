@@ -23,6 +23,7 @@ router.get('/:postId', async (req, res) => {
 router.post('/create/:postId', async (req, res) => {
 	const newLike = await prisma.like.create({
 		data: {
+			value: 1,
 			post: {
 				connect: {
 					id: Number(req.params.postId),
@@ -36,8 +37,29 @@ router.post('/create/:postId', async (req, res) => {
 		},
 	});
 
-	res.json({ message: 'Successfully liked', like: newLike });
+	res.json({ message: 'Successfully liked post', like: newLike });
 });
+
+// CREATE LIKE ON COMMENT = TODO LATER
+// router.post('/create/:commentId', async (req, res) => {
+// 	const newLike = await prisma.like.create({
+// 		data: {
+// 			value: 1,
+// 			post: {
+// 				connect: {
+// 					id: Number(req.params.commentId),
+// 				},
+// 			},
+// 			author: {
+// 				connect: {
+// 					id: req.currentUser,
+// 				},
+// 			},
+// 		},
+// 	});
+
+// 	res.json({ message: 'Successfully liked comment', like: newLike });
+// });
 
 // DELETE LIKE
 router.delete('/:postId', async (req, res) => {
