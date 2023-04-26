@@ -12,14 +12,14 @@ generator client {
 
 // User
 model User {
-  id           Int    @id @default(autoincrement())
+  id           Int     @id @default(autoincrement())
   firstname    String
   lastname     String
-  email        String @unique
-  username     String @unique
+  email        String  @unique
+  username     String  @unique
   password     String
-  profileimage String
-  role         Role   @default(USER)
+  profileimage String?
+  role         Role    @default(USER)
 
   // User's posts
   posts Post[]
@@ -33,13 +33,14 @@ model User {
 
 // Post
 model Post {
-  id        Int       @id @default(autoincrement())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   title     String
   content   String?
-  author    User      @relation(fields: [authorId], references: [id])
+  author    User     @relation(fields: [authorId], references: [id])
   authorId  Int
+
   comments  Comment[]
   likes     Like[]
   published Boolean
@@ -53,10 +54,11 @@ model Comment {
   content   String
   author    User     @relation(fields: [authorId], references: [id])
   authorId  Int
-  // comments  Comment[] // needs to be child comment for comments on comments
-  likes     Like[]
-  post      Post     @relation(fields: [postId], references: [id])
-  postId    Int
+
+  post   Post @relation(fields: [postId], references: [id])
+  postId Int
+
+  likes Like[]
 }
 
 // Like
@@ -64,12 +66,16 @@ model Like {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
-  comment   Comment  @relation(fields: [commentId], references: [id])
-  commentId Int
-  post      Post     @relation(fields: [postId], references: [id])
-  postId    Int
+  value     Int
+
+  author   User @relation(fields: [authorId], references: [id])
+  authorId Int
+
+  comment   Comment? @relation(fields: [commentId], references: [id])
+  commentId Int?
+
+  post   Post? @relation(fields: [postId], references: [id])
+  postId Int?
 }
 
 // Role

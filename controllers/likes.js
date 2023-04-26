@@ -19,12 +19,11 @@ router.get('/:postId', async (req, res) => {
 	res.json({ like });
 });
 
-// CREATE LIKE
+// CREATE LIKE ON POST
 router.post('/create/:postId', async (req, res) => {
 	const newLike = await prisma.like.create({
 		data: {
-			value: 1,
-			posts: {
+			post: {
 				connect: {
 					id: Number(req.params.postId),
 				},
