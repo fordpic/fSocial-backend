@@ -30,7 +30,7 @@ app.use(cookieParser());
 app.use('/register', register);
 app.use('/login', login);
 app.use('/users', authRequired, userRoutes);
-app.use('/posts', postRoutes); // TODO: add auth middleware back once done testing
+app.use('/posts', authRequired, postRoutes);
 app.use('/comments', authRequired, commentRoutes);
 app.use('/likes', authRequired, likeRoutes);
 

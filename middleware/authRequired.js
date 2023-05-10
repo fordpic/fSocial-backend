@@ -5,7 +5,6 @@ dotenv.config();
 
 const authRequired = (req, res, next) => {
 	const bearerHeader = req.headers['authorization'];
-	// console.log(bearerHeader);
 
 	if (typeof bearerHeader !== 'undefined') {
 		const token = bearerHeader.split(' ')[1];
