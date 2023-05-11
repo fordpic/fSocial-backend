@@ -13,7 +13,12 @@ router.get('/', async (req, res) => {
 // GET POST BY ID
 router.get('/:id', async (req, res) => {
 	const post = await prisma.post.findUnique({
-		where: { id: Number(req.params.id) },
+		where: {
+			id: Number(req.params.id),
+		},
+		include: {
+			comments: true,
+		},
 	});
 
 	res.json({ post });
