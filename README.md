@@ -2,7 +2,7 @@
 
 fSocial is a social site that allows users to view posts, upload posts, as well as leave comments on them, all with full CRUD functionality. fSocial users must first create an account on the site and log in, which will allow them to see other users' posts, comment on them, and make posts of their own, all from their own account. Passwords are encrypted on the backend and JWT is used for authentication, ensuring user info stays secure. The fSocial backend is a REST API that stores and returns all of the data for fSocial. 
 
-This repository holds the backend code for fSocial; the frontend code can be found [here]().
+This repository holds the backend code for fSocial; the frontend code can be found [here](https://github.com/fordpic/fSocial-frontend)
 
 ### Key Features
 
