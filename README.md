@@ -15,6 +15,7 @@ This repository holds the backend code for fSocial; the frontend code can be fou
 - Express for the server
 - PostgreSQL for the database
 - Prisma as the ORM
+- Vercel for deployment
 - bcrypt for hashing user passwords before storing in database
 - JWT for authentication
 - CORS to allow deployments to communicate
