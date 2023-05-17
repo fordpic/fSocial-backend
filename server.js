@@ -34,6 +34,7 @@ app.use('/posts', authRequired, postRoutes);
 app.use('/comments', authRequired, commentRoutes);
 app.use('/likes', authRequired, likeRoutes);
 
+// Let us know server is live
 app.get(`/`, (req, res) => {
 	res.send('Backend running, API is live');
 });
