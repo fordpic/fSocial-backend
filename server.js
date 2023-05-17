@@ -39,6 +39,7 @@ app.get(`/`, (req, res) => {
 	res.send('Backend running, API is live');
 });
 
+// Port
 app.listen(process.env.PORT || port, () => {
 	console.log(`listening on ${port}`);
 });
