@@ -34,6 +34,12 @@ app.use('/posts', authRequired, postRoutes);
 app.use('/comments', authRequired, commentRoutes);
 app.use('/likes', authRequired, likeRoutes);
 
+app.get(`/`, (req, res) => {
+	res.send('Backend running, API is live');
+});
+
 app.listen(process.env.PORT || port, () => {
 	console.log(`listening on ${port}`);
 });
+
+module.exports = app;
