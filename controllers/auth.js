@@ -67,8 +67,6 @@ const register = async (req, res) => {
 
 // Login Route
 const login = async (req, res) => {
-	console.log(req.body);
-
 	// Search for user via email
 	try {
 		const foundUser = await prisma.user.findUnique({
