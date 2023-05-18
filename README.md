@@ -16,6 +16,7 @@ This repository holds the backend code for fSocial; the frontend code can be fou
 - PostgreSQL for the database
 - Prisma as the ORM
 - Vercel for deployment
+- ElephantSQL for hosting the Postgres database
 - Postman for testing all routes thoroughly while in development
 - bcryptjs for hashing user passwords before storing in database
 - JWT for authentication
